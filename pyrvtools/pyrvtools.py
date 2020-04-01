@@ -55,8 +55,8 @@ class PyRvtools(object):
         """ Do some health check before go ahead """
 
         all_tabs = []
-        needed_tabs = ['tabvInfo', 'tabvDisk', 'tabvPartition',
-                       'tabvHost', 'tabvHBA', 'tabvDatastore']
+        needed_tabs = ['vInfo', 'vDisk', 'vPartition',
+                       'vHost', 'vHBA', 'vDatastore']
 
         for sheet in self._book.sheets():
             all_tabs.append(sheet.name)
@@ -71,7 +71,7 @@ class PyRvtools(object):
         :return Cluster
         """
 
-        for cluster in set(self._get_names('tabvHost', 'Cluster')):
+        for cluster in set(self._get_names('vHost', 'Cluster')):
             if cluster:
                 yield Cluster(self._book, cluster)
 
@@ -82,7 +82,7 @@ class PyRvtools(object):
         """
 
         found = None
-        for cluster in self._get_names('tabvHost', 'Cluster'):
+        for cluster in self._get_names('vHost', 'Cluster'):
             if cluster == name:
                 found = Cluster(self._book, cluster)
                 break
@@ -98,7 +98,7 @@ class PyRvtools(object):
         :return DataCenter
         """
 
-        for datacenter in set(self._get_names('tabvHost', 'Datacenter')):
+        for datacenter in set(self._get_names('vHost', 'Datacenter')):
             if datacenter:
                 yield DataCenter(self._book, datacenter)
 
@@ -109,7 +109,7 @@ class PyRvtools(object):
         """
 
         found = None
-        for datacenter in self._get_names('tabvHost', 'Datacenter'):
+        for datacenter in self._get_names('vHost', 'Datacenter'):
             if datacenter == name:
                 found = DataCenter(self._book, datacenter)
                 break
@@ -125,7 +125,7 @@ class PyRvtools(object):
         :return DataStore
         """
 
-        for datastore in self._get_names('tabvDatastore', 'Name'):
+        for datastore in self._get_names('vDatastore', 'Name'):
             yield DataStore(self._book, datastore)
 
     def get_datastore_by_name(self, name):
@@ -135,7 +135,7 @@ class PyRvtools(object):
         """
 
         found = None
-        for datastore in self._get_names('tabvDatastore', 'Name'):
+        for datastore in self._get_names('vDatastore', 'Name'):
             if datastore == name:
                 found = DataStore(self._book, datastore)
                 break
@@ -150,7 +150,7 @@ class PyRvtools(object):
         :return Host
         """
 
-        for host in self._get_names('tabvHost', 'Host'):
+        for host in self._get_names('vHost', 'Host'):
             yield Host(self._book, host)
 
     def get_host_by_name(self, name):
@@ -160,7 +160,7 @@ class PyRvtools(object):
         """
 
         found = None
-        for host in self._get_names('tabvHost', 'Host'):
+        for host in self._get_names('vHost', 'Host'):
             if host == name:
                 found = Host(self._book, host)
                 break
@@ -175,7 +175,7 @@ class PyRvtools(object):
         :return VirtualMachine
         """
 
-        for vm in self._get_names('tabvInfo', 'VM'):
+        for vm in self._get_names('vInfo', 'VM'):
             yield VirtualMachine(self._book, vm)
 
     def get_vm_by_name(self, name):
@@ -185,7 +185,7 @@ class PyRvtools(object):
         """
 
         found = None
-        for vm in self._get_names('tabvInfo', 'VM'):
+        for vm in self._get_names('vInfo', 'VM'):
             if vm == name:
                 found = VirtualMachine(self._book, vm)
                 break
