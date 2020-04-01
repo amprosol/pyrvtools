@@ -89,7 +89,7 @@ class Cluster(ESXBase):
         :param name: name of the Cluster
         """
         super().__init__(workbook, name)
-        self._sheet = self._book.sheet_by_name('tabvHost')
+        self._sheet = self._book.sheet_by_name('vHost')
         self._column = 'Cluster'
         self._hosts = []
 
@@ -118,7 +118,7 @@ class DataCenter(ESXBase):
         :param name: name of that DataCenter
         """
         super().__init__(workbook, name)
-        self._sheet = self._book.sheet_by_name('tabvHost')
+        self._sheet = self._book.sheet_by_name('vHost')
         self._column = 'Datacenter'
         self._clusters = []
         self._hosts = []
@@ -160,7 +160,7 @@ class DataStore(ESXBase):
         :param name: name of that DataStore
         """
         super().__init__(workbook, name)
-        self._sheet = self._book.sheet_by_name('tabvDatastore')
+        self._sheet = self._book.sheet_by_name('vDatastore')
         self._column = 'Name'
         self._hosts = []
 
@@ -270,7 +270,7 @@ class Host(ESXBase):
         :param name: name of that Host
         """
         super().__init__(workbook, name)
-        self._sheet = self._book.sheet_by_name('tabvHost')
+        self._sheet = self._book.sheet_by_name('vHost')
         self._column = 'Host'
         self._hba = []
         self._vms = []
@@ -299,7 +299,7 @@ class Host(ESXBase):
     @property
     def hba(self):
         if not self._hba:
-            data = self._search(sheet=self._book.sheet_by_name('tabvHBA'),
+            data = self._search(sheet=self._book.sheet_by_name('vHBA'),
                                 column='Host',
                                 target=self._name)
             for one_hba in data:
@@ -338,7 +338,7 @@ class Host(ESXBase):
     @property
     def vm(self):
         if not self._vms:
-            data = self._search(sheet=self._book.sheet_by_name('tabvInfo'),
+            data = self._search(sheet=self._book.sheet_by_name('vInfo'),
                                 column='Host',
                                 target=self._name)
             for vm in data:
@@ -357,7 +357,7 @@ class VirtualMachine(ESXBase):
         :param name: name of that VirtualMachine
         """
         super().__init__(workbook, name)
-        self._sheet = self._book.sheet_by_name('tabvInfo')
+        self._sheet = self._book.sheet_by_name('vInfo')
         self._column = 'VM'
         self._vdisks = []
         self._vpartitions = []
@@ -419,7 +419,7 @@ class VirtualMachine(ESXBase):
     @property
     def vmdk(self):
         if not self._vdisks:
-            data = self._search(sheet=self._book.sheet_by_name('tabvDisk'),
+            data = self._search(sheet=self._book.sheet_by_name('vDisk'),
                                 column='VM',
                                 target=self._name)
 
@@ -431,7 +431,7 @@ class VirtualMachine(ESXBase):
     @property
     def vnetwork(self):
         if not self._vnetworks:
-            data = self._search(sheet=self._book.sheet_by_name('tabvNetwork'),
+            data = self._search(sheet=self._book.sheet_by_name('vNetwork'),
                                 column='VM',
                                 target=self._name)
 
@@ -443,7 +443,7 @@ class VirtualMachine(ESXBase):
     @property
     def vpartition(self):
         if not self._vpartitions:
-            data = self._search(sheet=self._book.sheet_by_name('tabvPartition'),
+            data = self._search(sheet=self._book.sheet_by_name('vPartition'),
                                 column='VM',
                                 target=self._name)
 
